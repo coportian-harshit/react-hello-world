@@ -8,30 +8,30 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/ruby:2.4.1
-      - image: circleci/mongo:3.6
+      # specify the version you desire here
+      - image: circleci/node:10.1.0
     steps:
       - checkout
       - run: echo "Running the build"
       - run:
           name: install dependencies
           command: |
-            bundle install --jobs=4 --retry=3 --path vendor/bundle
+            yarn install
   unit_test:
     docker:
-      - image: circleci/ruby:2.4.1
+      - image: circleci/node:10.1.0
     steps:
       - checkout
       - run: echo "UNIT TEST"
   integration_test:
     docker:
-      - image: circleci/ruby:2.4.1
+      - image: circleci/node:10.1.0
     steps:
       - checkout
       - run: echo "INTEGRATION TEST"
   functional_test:
     docker:
-      - image: circleci/ruby:2.4.1
+      - image: circleci/node:10.1.0
     steps:
       - checkout
       - run: echo "FUNCTIONAL TEST"
@@ -126,4 +126,3 @@ workflows:
 #       # - store_artifacts:
 #       #     path: /tmp/test-results
 #       #     destination: test-results
-
